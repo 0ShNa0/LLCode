@@ -1,0 +1,77 @@
+#include <iostream>
+
+using namespace std;
+
+struct node{ int data;
+node* next;
+};
+
+struct node* head;
+
+
+node* createll(int val)
+{  struct node*temp=new node();
+ temp->data=val;
+ temp->next=NULL;
+
+    if(head==NULL)
+    {head=temp;
+    }
+    else
+    {struct node* ctr=head;
+      while(ctr->next!=NULL)  
+        ctr=ctr->next;
+        ctr->next=temp;
+    }
+   return(head);
+}
+ void display(node *n) {  
+
+    struct node *curr = n;  
+
+    if(n == NULL) {  
+        cout<<"List is empty\n";  
+        return;  
+    }  
+    cout<<"Nodes of linked list: \n";  
+    while(curr != NULL) {  
+
+        printf("%d ", curr->data);  
+        curr = curr->next;  
+    }     
+    cout<<"\n";
+}
+
+node* kfromend(int k)    
+{ node* sp=head,*fp;
+
+for(int i=1;i<=k;i++)
+  {sp=sp->next;
+  } 
+  
+ fp=head;
+ while(sp!=NULL)
+  {fp=fp->next;
+  sp=sp->next;   
+  }  
+  return(fp);
+     
+}    
+
+int main()
+{ int x,n,m;
+ struct node* res;
+  cout<<"Enter number of values \n";
+  cin>>n;
+    cout<<"Enter values";
+  for(int i=0;i<n;i++)
+  {cin>>x;
+     res=createll(x); 
+  }
+  display(res);
+  cout<<"Enter the value of k for which kth node from end will be displayed";
+  cin>>m;
+ struct node *q=kfromend(m);
+ cout<<q->data;
+ return 0;
+}
