@@ -1,0 +1,78 @@
+#include <iostream>
+
+using namespace std;
+
+struct node{ int data;
+node* next;
+
+
+};
+
+struct node* head;
+
+
+node* createll(int val)
+{  struct node*temp=new node();
+ temp->data=val;
+ temp->next=NULL;
+
+    if(head==NULL)
+    {head=temp;
+    }
+    else
+    {struct node* ctr=head;
+      while(ctr->next!=NULL)  
+        ctr=ctr->next;
+        ctr->next=temp;
+    }
+   return(head);
+}
+ void display() {  
+
+    struct node *curr = head;  
+
+    if(head == NULL) {  
+        cout<<"List is empty\n";  
+        return;  
+    }  
+    cout<<"Nodes of linked list: \n";  
+    while(curr != NULL) {  
+
+        printf("%d ", curr->data);  
+        curr = curr->next;  
+    }     
+}
+void dellast()
+{ if(head==NULL)
+    cout<<"Error your list is empty\n";
+    else
+    {struct node* curr=head;
+    struct node* prev=NULL;
+    while(curr->next!=NULL)
+       {   prev=curr;
+           curr=curr->next;
+       }
+       cout<<"\n"<<curr->data<<" is being deleted\n";
+       prev->next=NULL;
+        
+    }
+    
+    return;
+    
+}
+
+
+int main()
+{ int x,n;
+ struct node* res;
+  cout<<"Enter number of values \n";
+  cin>>n;
+    cout<<"Enter values";
+  for(int i=0;i<n;i++)
+  {cin>>x;
+     res=createll(x); 
+  }
+  display();
+  dellast();
+  display();
+}
