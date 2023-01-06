@@ -1,0 +1,115 @@
+
+#include <iostream>
+using namespace std;
+
+struct node{ int data;
+node *next;
+    
+};
+
+node* createll(node *head,int val)
+{  struct node*temp=new node();
+ temp->data=val;
+ temp->next=NULL;
+
+    if(head==NULL)
+    {head=temp;
+    }
+    else
+    {struct node* ctr=head;
+      while(ctr->next!=NULL)  
+        ctr=ctr->next;
+        ctr->next=temp;
+    }
+   return(head);
+}
+ void display(node *n) {  
+
+    struct node *curr = n;  
+
+    if(n == NULL) {  
+        cout<<"List is empty\n";  
+        return;  
+    }  
+    cout<<"Nodes of linked list: \n";  
+    while(curr != NULL) {  
+
+        printf("%d ", curr->data);  
+        curr = curr->next;  
+    }     
+    cout<<"\n";
+}
+
+node *middlell(node *head)
+{node*fp=head,*sp=head;
+while(fp->next!=NULL)
+ { sp=sp->next;
+   fp=fp->next->next;  
+ }   
+    
+  return(sp);  
+    
+}
+
+node* revlist(node *head)
+{ struct node* curr=head;
+struct node *prev=NULL,*after;
+
+while(curr!=NULL)
+{after=curr->next;
+curr->next=prev;
+prev=curr;
+curr=after;
+       
+}    
+
+return(prev);
+}
+
+void folds(node *head)
+{node* mid=new node();
+mid=middlell(head);
+node* head2=new node();
+head2=mid->next;
+mid->next=NULL;
+struct node*head0=head,*head1=new node();
+head1=revlist(head2);
+struct node*temp=new node();
+temp->data=0;
+temp->next=NULL;
+head=temp;
+node* curr = head;
+    while (head0|| head1) {
+        
+        if (head0) {
+            curr->next = head0;
+            curr = curr->next;
+            head0 = head0->next;
+        }
+        
+        if (head1) {
+            curr->next = head1;
+            curr = curr->next;
+            head1 = head1->next;
+        }
+    }
+    // Assign the head of the new list to head pointer
+    head = head->next;
+   
+}
+
+int main()
+{ int x,n;
+ struct node* res=NULL;
+  cout<<"Enter number of values \n";
+  cin>>n;
+    cout<<"Enter values";
+  for(int i=0;i<n;i++)
+  {cin>>x;
+     res=createll(res,x); 
+  }
+  display(res);
+  
+  folds(res);
+  display(res);
+}
